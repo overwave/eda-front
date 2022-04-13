@@ -1,3 +1,3 @@
 
-rootProject.name = "eda-front"
+rootProject.name = "where-eat-frontend"
 
