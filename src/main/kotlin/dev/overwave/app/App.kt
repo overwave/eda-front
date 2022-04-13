@@ -29,11 +29,7 @@ private val client = HttpClient(Js) {
     }
     defaultRequest {
         contentType(ContentType.Application.Json)
-        url("http://localhost:8090/")
-//        url {
-//            protocol = URLProtocol.HTTPS
-//            host = "ktor.io"
-//        }
+        url("https://overwave.dev/api/")
 //        header("X-Custom-Header", "Hello")
     }
 }
@@ -44,7 +40,7 @@ val App = FC<Props> {
 
     useEffectOnce {
         mainScope.launch {
-            val response: HttpResponse = client.get("/posts/")
+            val response: HttpResponse = client.get("posts/")
             val page: Page<Post> = response.body()
             posts = page.content
         }
