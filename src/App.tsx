@@ -1,12 +1,16 @@
+import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {CssBaseline, ThemeProvider, useMediaQuery} from "@mui/material";
 import {SnackbarProvider} from 'notistack';
 
 import {useAppDispatch, useAppSelector} from "./store/hooks";
-import {DARK, LIGHT, selectTheme, set} from "./store/Theme";
-import HomePage from "./app/HomePage";
-import LoginPage from "./app/LoginPage";
-import ModerationPage from "./app/ModerationPage";
+import {selectTheme, setTheme} from "./store/Theme";
+import {DARK, LIGHT} from "./Theme";
+import {HomePage} from "./page/HomePage";
+import {LoginPage} from "./page/LoginPage";
+import {ModerationPage} from "./page/ModerationPage";
+import {AppBar} from "./component/app_bar/AppBar";
+import {RequireAuth} from "./component/auth/RequireAuth";
 
 export default function App() {
     const preferDarkTheme = useMediaQuery('(prefers-color-scheme: dark)');
@@ -17,21 +21,27 @@ export default function App() {
     if (theme === undefined) {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === null) {
-            dispatch(set(!preferDarkTheme));
+            dispatch(setTheme(!preferDarkTheme));
         } else {
-            dispatch(set(savedTheme === 'true'));
+            dispatch(setTheme(savedTheme === 'true'));
         }
     }
 
     return (
         <ThemeProvider theme={theme ? LIGHT : DARK}>
+            <CssBaseline enableColorScheme/>
             <SnackbarProvider maxSnack={3}>
-                <CssBaseline/>
+                <AppBar/>
                 <BrowserRouter basename="/">
                     <Routes>
                         <Route path='/' element={<HomePage/>}/>
                         <Route path='/login' element={<LoginPage/>}/>
-                        <Route path='/moderation' element={<ModerationPage/>}/>
+                        <Route path='/moderation' element={
+                            <RequireAuth>
+                                <ModerationPage/>
+                            </RequireAuth>
+                        }
+                        />
                     </Routes>
                 </BrowserRouter>
             </SnackbarProvider>

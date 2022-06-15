@@ -1,0 +1,15 @@
+$cafe-noir: #513c2cff;
+$sapphire-blue: #125e8aff;
+$celadon-blue: #417ea1ff;
+$maximum-green: #698f3fff;
+$coquelicot: #eb4511ff;
+$lavender-blue: #c3c3e6ff;
+
+:export {
+  primary: $cafe-noir;
+  secondary: $sapphire-blue;
+  secondary_light: $celadon-blue;
+  success: $maximum-green;
+  error: $coquelicot;
+  info: $lavender-blue;
+}

@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 
 import {store} from './store/store';
 import App from "./App";
+import './style.module.scss'
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 

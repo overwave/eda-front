@@ -1,5 +1,7 @@
 export interface Media {
     name: string;
+    width: number;
+    height: number;
     type: MediaType;
 }
 

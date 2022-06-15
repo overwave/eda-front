@@ -1,11 +1,13 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import postsReducer from './Posts';
 import themeReducer from './Theme';
+import jwtTokenReducer from './JwtToken';
 
 export const store = configureStore({
   reducer: {
     posts: postsReducer,
-    theme: themeReducer
+    theme: themeReducer,
+    jwtToken: jwtTokenReducer
   },
 });
 
